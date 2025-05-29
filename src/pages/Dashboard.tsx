@@ -6,18 +6,21 @@ import { StatsCards } from '@/components/dashboard/StatsCards';
 import { ApplicationForm } from '@/components/applications/ApplicationForm';
 import { ApplicationsList } from '@/components/applications/ApplicationsList';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Database } from '@/integrations/supabase/types';
+
+type JobApplication = Database['public']['Tables']['job_applications']['Row'];
 
 export const Dashboard = () => {
   const { applications, loading, createApplication, updateApplication, deleteApplication } = useJobApplications();
   const [showForm, setShowForm] = useState(false);
-  const [editingApplication, setEditingApplication] = useState(null);
+  const [editingApplication, setEditingApplication] = useState<JobApplication | null>(null);
 
   const handleAddApplication = () => {
     setEditingApplication(null);
     setShowForm(true);
   };
 
-  const handleEditApplication = (application: any) => {
+  const handleEditApplication = (application: JobApplication) => {
     setEditingApplication(application);
     setShowForm(true);
   };
@@ -25,6 +28,15 @@ export const Dashboard = () => {
   const handleCloseForm = () => {
     setShowForm(false);
     setEditingApplication(null);
+  };
+
+  const handleSubmit = async (data: any) => {
+    if (editingApplication) {
+      await updateApplication(editingApplication.id, data);
+    } else {
+      await createApplication(data);
+    }
+    handleCloseForm();
   };
 
   if (loading) {
@@ -61,7 +73,7 @@ export const Dashboard = () => {
           </DialogHeader>
           <ApplicationForm
             application={editingApplication}
-            onSubmit={editingApplication ? updateApplication : createApplication}
+            onSubmit={handleSubmit}
             onCancel={handleCloseForm}
           />
         </DialogContent>

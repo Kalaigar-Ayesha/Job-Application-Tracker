@@ -20,8 +20,8 @@ export const ApplicationForm = ({ application, onSubmit, onCancel }: Application
   const [formData, setFormData] = useState({
     company_name: '',
     job_title: '',
-    job_type: 'internship',
-    status: 'applied',
+    job_type: 'internship' as const,
+    status: 'applied' as const,
     application_date: new Date().toISOString().split('T')[0],
     rejection_reason: '',
     notes: '',
@@ -34,8 +34,8 @@ export const ApplicationForm = ({ application, onSubmit, onCancel }: Application
       setFormData({
         company_name: application.company_name || '',
         job_title: application.job_title || '',
-        job_type: application.job_type || 'internship',
-        status: application.status || 'applied',
+        job_type: (application.job_type as 'internship' | 'full-time') || 'internship',
+        status: (application.status as 'applied' | 'interview' | 'rejected' | 'offer') || 'applied',
         application_date: application.application_date || new Date().toISOString().split('T')[0],
         rejection_reason: application.rejection_reason || '',
         notes: application.notes || '',

@@ -66,13 +66,13 @@ export const ApplicationsList = ({ applications, onEdit, onDelete }: Application
         {applications.map((application) => (
           <Card key={application.id} className="hover:shadow-md transition-shadow">
             <CardHeader>
-              <div className="flex justify-between items-start">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
                 <div className="flex-1">
-                  <CardTitle className="flex items-center gap-2">
+                  <CardTitle className="flex items-center gap-2 text-lg">
                     <Building className="h-5 w-5 text-gray-600" />
                     {application.company_name}
                   </CardTitle>
-                  <p className="text-lg font-medium text-gray-700 mt-1">
+                  <p className="text-base font-medium text-gray-700 mt-1">
                     {application.job_title}
                   </p>
                 </div>
@@ -119,7 +119,7 @@ export const ApplicationsList = ({ applications, onEdit, onDelete }: Application
               {application.notes && (
                 <div className="mb-3">
                   <p className="text-sm font-medium text-gray-600 mb-1">Notes:</p>
-                  <p className="text-sm text-gray-700">{application.notes}</p>
+                  <p className="text-sm text-gray-700 line-clamp-3">{application.notes}</p>
                 </div>
               )}
               

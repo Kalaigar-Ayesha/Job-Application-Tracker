@@ -15,7 +15,10 @@ export const useJobApplications = () => {
   const { user } = useAuth();
 
   const fetchApplications = async () => {
-    if (!user) return;
+    if (!user) {
+      setLoading(false);
+      return;
+    }
 
     try {
       const { data, error } = await supabase
