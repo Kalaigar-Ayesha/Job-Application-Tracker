@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
@@ -11,7 +10,7 @@ interface SignUpFormProps {
   onToggleMode: () => void;
 }
 
-export const SignUpForm = ({ onToggleMode }: SignUpFormProps) => {
+export function SignUpForm({ onToggleMode }: SignUpFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -25,9 +24,10 @@ export const SignUpForm = ({ onToggleMode }: SignUpFormProps) => {
 
     try {
       await signUp(email, password, { firstName, lastName });
-      toast.success('Account created successfully! Please check your email for verification.');
-    } catch (error) {
-      toast.error('Failed to create account. Please try again.');
+      toast.success('Account created successfully! Welcome to Career Track Compass.');
+    } catch (error: any) {
+      console.error('Signup error:', error);
+      toast.error(error?.message || 'Failed to create account. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -94,4 +94,4 @@ export const SignUpForm = ({ onToggleMode }: SignUpFormProps) => {
       </CardContent>
     </Card>
   );
-};
+}

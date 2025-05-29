@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
@@ -11,7 +10,7 @@ interface LoginFormProps {
   onToggleMode: () => void;
 }
 
-export const LoginForm = ({ onToggleMode }: LoginFormProps) => {
+export function LoginForm({ onToggleMode }: LoginFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -24,8 +23,9 @@ export const LoginForm = ({ onToggleMode }: LoginFormProps) => {
     try {
       await signIn(email, password);
       toast.success('Welcome back!');
-    } catch (error) {
-      toast.error('Invalid email or password');
+    } catch (error: any) {
+      console.error('Login error:', error);
+      toast.error(error?.message || 'Invalid email or password');
     } finally {
       setLoading(false);
     }
@@ -71,4 +71,4 @@ export const LoginForm = ({ onToggleMode }: LoginFormProps) => {
       </CardContent>
     </Card>
   );
-};
+}
