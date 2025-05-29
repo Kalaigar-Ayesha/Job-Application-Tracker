@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => ({
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),
+  base: '/Job-Application-Tracker/' ,
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
