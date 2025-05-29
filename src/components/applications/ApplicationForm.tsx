@@ -16,12 +16,23 @@ interface ApplicationFormProps {
   onCancel: () => void;
 }
 
+type FormData = {
+  company_name: string;
+  job_title: string;
+  job_type: 'internship' | 'full-time';
+  status: 'applied' | 'interview' | 'rejected' | 'offer';
+  application_date: string;
+  rejection_reason: string;
+  notes: string;
+  resume_used: string;
+};
+
 export const ApplicationForm = ({ application, onSubmit, onCancel }: ApplicationFormProps) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     company_name: '',
     job_title: '',
-    job_type: 'internship' as const,
-    status: 'applied' as const,
+    job_type: 'internship',
+    status: 'applied',
     application_date: new Date().toISOString().split('T')[0],
     rejection_reason: '',
     notes: '',
@@ -58,7 +69,7 @@ export const ApplicationForm = ({ application, onSubmit, onCancel }: Application
     }
   };
 
-  const handleChange = (field: string, value: string) => {
+  const handleChange = (field: keyof FormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
@@ -89,7 +100,7 @@ export const ApplicationForm = ({ application, onSubmit, onCancel }: Application
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="job_type">Job Type</Label>
-          <Select value={formData.job_type} onValueChange={(value) => handleChange('job_type', value)}>
+          <Select value={formData.job_type} onValueChange={(value: 'internship' | 'full-time') => handleChange('job_type', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select job type" />
             </SelectTrigger>
@@ -102,7 +113,7 @@ export const ApplicationForm = ({ application, onSubmit, onCancel }: Application
 
         <div className="space-y-2">
           <Label htmlFor="status">Status</Label>
-          <Select value={formData.status} onValueChange={(value) => handleChange('status', value)}>
+          <Select value={formData.status} onValueChange={(value: 'applied' | 'interview' | 'rejected' | 'offer') => handleChange('status', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Select status" />
             </SelectTrigger>
