@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useJobApplications } from '@/hooks/useJobApplications';
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader';
@@ -65,9 +64,9 @@ export const Dashboard = () => {
       </main>
 
       <Dialog open={showForm} onOpenChange={setShowForm}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="w-[95vw] max-w-2xl p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>
+            <DialogTitle className="text-xl sm:text-2xl">
               {editingApplication ? 'Edit Application' : 'Add New Application'}
             </DialogTitle>
           </DialogHeader>

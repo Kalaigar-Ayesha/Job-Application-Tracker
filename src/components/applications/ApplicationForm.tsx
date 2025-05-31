@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -74,8 +73,8 @@ export const ApplicationForm = ({ application, onSubmit, onCancel }: Application
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+      <div className="grid grid-cols-1 gap-4">
         <div className="space-y-2">
           <Label htmlFor="company_name">Company Name *</Label>
           <Input
@@ -97,11 +96,11 @@ export const ApplicationForm = ({ application, onSubmit, onCancel }: Application
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="job_type">Job Type</Label>
           <Select value={formData.job_type} onValueChange={(value: 'internship' | 'full-time') => handleChange('job_type', value)}>
-            <SelectTrigger>
+            <SelectTrigger className="w-full">
               <SelectValue placeholder="Select job type" />
             </SelectTrigger>
             <SelectContent>
@@ -114,7 +113,7 @@ export const ApplicationForm = ({ application, onSubmit, onCancel }: Application
         <div className="space-y-2">
           <Label htmlFor="status">Status</Label>
           <Select value={formData.status} onValueChange={(value: 'applied' | 'interview' | 'rejected' | 'offer') => handleChange('status', value)}>
-            <SelectTrigger>
+            <SelectTrigger className="w-full">
               <SelectValue placeholder="Select status" />
             </SelectTrigger>
             <SelectContent>
@@ -127,7 +126,7 @@ export const ApplicationForm = ({ application, onSubmit, onCancel }: Application
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="application_date">Application Date</Label>
           <Input
@@ -169,14 +168,15 @@ export const ApplicationForm = ({ application, onSubmit, onCancel }: Application
           onChange={(e) => handleChange('notes', e.target.value)}
           placeholder="Any additional notes about this application..."
           rows={3}
+          className="min-h-[100px]"
         />
       </div>
 
-      <div className="flex justify-end gap-4">
-        <Button type="button" variant="outline" onClick={onCancel}>
+      <div className="flex flex-col sm:flex-row justify-end gap-3 sm:gap-4 pt-2">
+        <Button type="button" variant="outline" onClick={onCancel} className="w-full sm:w-auto">
           Cancel
         </Button>
-        <Button type="submit" disabled={loading}>
+        <Button type="submit" disabled={loading} className="w-full sm:w-auto">
           {loading ? 'Saving...' : application ? 'Update Application' : 'Add Application'}
         </Button>
       </div>

@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Database } from '@/integrations/supabase/types';
 import { Briefcase, Clock, CheckCircle, XCircle } from 'lucide-react';
@@ -44,7 +43,7 @@ export const StatsCards = ({ applications }: StatsCardsProps) => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
       {stats.map((stat, index) => {
         const Icon = stat.icon;
         return (
@@ -54,7 +53,7 @@ export const StatsCards = ({ applications }: StatsCardsProps) => {
               <Icon className={`h-4 w-4 ${stat.color}`} />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stat.value}</div>
+              <div className="text-xl sm:text-2xl font-bold">{stat.value}</div>
             </CardContent>
           </Card>
         );
