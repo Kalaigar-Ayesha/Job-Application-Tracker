@@ -1,4 +1,4 @@
-# Career Track Compass
+# Job Application tracker 
 
 A web application designed to help job seekers track and manage their job applications effectively.
 
